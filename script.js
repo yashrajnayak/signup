@@ -67,7 +67,21 @@ document.getElementById('githubForm').addEventListener('submit', async function(
             return;
         }
         const data = await response.json();
-        window.location.href = selectedEvent.value;
+        
+        // Find the selected event details
+        const selectedEventDetails = CONFIG.events.find(event => event.formUrl === selectedEvent.value);
+        const eventInfo = `${selectedEventDetails.city} (${selectedEventDetails.date})`;
+        
+        // Get user's full name from GitHub API (fallback to username if name is null)
+        const fullName = data.name || username;
+        
+        // Construct the URL with all parameters
+        const redirectUrl = `${selectedEvent.value}?usp=pp_url` + 
+            `&entry.1334197574=${encodeURIComponent(eventInfo)}` +
+            `&entry.1252770814=${encodeURIComponent(username)}` +
+            `&entry.1001119393=${encodeURIComponent(fullName)}`;
+            
+        window.location.href = redirectUrl;
     } catch (error) {
         console.error('Error:', error);
         errorElement.classList.add('visible');
