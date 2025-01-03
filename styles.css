@@ -53,13 +53,25 @@ h1 {
 
 .input-group {
     margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.error-message {
+    color: #f85149;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+.error-message.visible {
+    display: block;
 }
 
 label {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--text-secondary);
-    font-size: 0.875rem;
+    font-size: 1.25rem;
     text-align: center;
 }
 
@@ -113,26 +125,55 @@ button:hover {
 }
 
 .radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
     margin-top: 0.5rem;
 }
 
 .radio-option {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    position: relative;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.radio-option:hover {
+    border-color: var(--input-border-focus);
 }
 
 .radio-option input[type="radio"] {
-    width: auto;
-    margin: 0;
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .radio-option label {
     margin: 0;
-    text-align: left;
+    text-align: center;
     color: var(--text-primary);
     font-size: 1rem;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+}
+
+.radio-option input[type="radio"]:checked + label {
+    color: var(--accent);
+}
+
+.radio-option input[type="radio"]:checked ~ .radio-option {
+    border-color: var(--accent);
+    background-color: rgba(35, 134, 54, 0.1);
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: block;
 }
