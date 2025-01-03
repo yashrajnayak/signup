@@ -1,54 +1,45 @@
-// Constants for form URLs (these don't change with dates)
-const FORM_URLS = {
-    "Mumbai": "https://docs.google.com/forms/d/e/1FAIpQLSdaC4Uqts-p-Ad9lUhOfCt4yMsBQJ3_fkQpyp4GwPvnVMxNtQ/viewform",
-    "Delhi NCR": "https://docs.google.com/forms/d/e/1FAIpQLSe49RWkRssB4AFO9NVL08UcSp7eKA0VJVmUmzQKmS8quMEszg/viewform",
-    "Bengaluru": "https://docs.google.com/forms/d/e/1FAIpQLSdcqzZ-wE3IzhmkOV_ElC8TIugCK7p8eEznTJCWjSlGYMB46A/viewform"
+const CONFIG = {
+    events: [
+        {
+            city: "Mumbai",
+            date: "18th January 2025",
+            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdaC4Uqts-p-Ad9lUhOfCt4yMsBQJ3_fkQpyp4GwPvnVMxNtQ/viewform"
+        },
+        {
+            city: "Delhi NCR",
+            date: "18th January 2025",
+            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe49RWkRssB4AFO9NVL08UcSp7eKA0VJVmUmzQKmS8quMEszg/viewform"
+        },
+        {
+            city: "Bengaluru",
+            date: "25th January 2025",
+            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdcqzZ-wE3IzhmkOV_ElC8TIugCK7p8eEznTJCWjSlGYMB46A/viewform"
+        }
+    ]
 };
 
 async function populateEventOptions() {
     const eventOptionsDiv = document.getElementById('eventOptions');
     
-    try {
-        const response = await fetch('config.json');
-        const config = await response.json();
+    CONFIG.events.forEach((event, index) => {
+        const radioDiv = document.createElement('div');
+        radioDiv.className = 'radio-option';
         
-        // Filter events that haven't occurred yet
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.id = `event${index}`;
+        input.name = 'event';
+        input.value = event.formUrl;
+        input.required = true;
         
-        const futureEvents = config.events.filter(event => {
-            const eventDate = new Date(event.date);
-            return eventDate >= today;
-        });
-
-        futureEvents.forEach((event, index) => {
-            const radioDiv = document.createElement('div');
-            radioDiv.className = 'radio-option';
-            
-            const input = document.createElement('input');
-            input.type = 'radio';
-            input.id = `event${index}`;
-            input.name = 'event';
-            input.value = FORM_URLS[event.city];
-            input.required = true;
-            
-            const label = document.createElement('label');
-            label.htmlFor = `event${index}`;
-            // Format date to be more readable
-            const formattedDate = new Date(event.date).toLocaleDateString('en-US', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            });
-            label.textContent = `${event.city} (${formattedDate})`;
-            
-            radioDiv.appendChild(input);
-            radioDiv.appendChild(label);
-            eventOptionsDiv.appendChild(radioDiv);
-        });
-    } catch (error) {
-        console.error('Error loading events:', error);
-    }
+        const label = document.createElement('label');
+        label.htmlFor = `event${index}`;
+        label.textContent = `${event.city} (${event.date})`;
+        
+        radioDiv.appendChild(input);
+        radioDiv.appendChild(label);
+        eventOptionsDiv.appendChild(radioDiv);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', populateEventOptions);
