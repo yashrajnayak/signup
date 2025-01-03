@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>GitTogether Registration</title>
+    <link rel="icon" href="https://github.com/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="form-card">
+            <h1>Register Now</h1>
             <form id="githubForm">
                 <div class="input-group">
-                    <label for="username">Enter your GitHub username</label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" id="username" name="username" placeholder="Enter your GitHub username" required>
+                </div>
+                <div class="input-group">
+                    <label>Which upcoming GitTogether you'd like to join?</label>
+                    <div class="radio-group" id="eventOptions">
+                        <!-- Radio buttons will be dynamically populated -->
+                    </div>
                 </div>
                 <button type="submit">Proceed</button>
             </form>

@@ -1,0 +1,10 @@
+events:
+  - city: Mumbai
+    date: "18th January 2025"
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdaC4Uqts-p-Ad9lUhOfCt4yMsBQJ3_fkQpyp4GwPvnVMxNtQ/viewform"
+  - city: "Delhi NCR"
+    date: "18th January 2025"
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe49RWkRssB4AFO9NVL08UcSp7eKA0VJVmUmzQKmS8quMEszg/viewform"
+  - city: Bengaluru
+    date: "25th January 2025"
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdcqzZ-wE3IzhmkOV_ElC8TIugCK7p8eEznTJCWjSlGYMB46A/viewform" 
